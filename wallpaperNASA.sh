@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DATE=$(date "+%Y-%m-%d")
+DATE=$1
 TS=$(echo $(($(date +%s%N)/1000000)))
 
 cd /tmp/
