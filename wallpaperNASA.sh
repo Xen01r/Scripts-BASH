@@ -1,12 +1,12 @@
 #!/bin/bash
 
 DATE=$(date "+%Y-%m-%d")
-DATE=$1
 TS=$(echo $(($(date +%s%N)/1000000)))
+SOURCE="Terra"	#Choose between : Terra & Aqua
 
 cd /tmp/
 
-/usr/bin/wget -t 1 'https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&LAYERS=MODIS_Terra_CorrectedReflectance_TrueColor&CRS=EPSG:4326&TIME='${DATE}'&BBOX=41.23,-11.71,51.91,15.905&FORMAT=image/jpeg&WIDTH=6284&HEIGHT=2430&AUTOSCALE=TRUE&ts='${TS}'&DOWNLOAD=yes' -O tmp.jpg	#Download image
+/usr/bin/wget -t 1 'https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&LAYERS=MODIS_'${SOURCE}'_CorrectedReflectance_TrueColor&CRS=EPSG:4326&TIME='${DATE}'&BBOX=41.23,-11.71,51.91,15.905&FORMAT=image/jpeg&WIDTH=6284&HEIGHT=2430&AUTOSCALE=TRUE&ts='${TS}'&DOWNLOAD=yes' -O tmp.jpg	#Download image
 
 if [ $(echo "100 * $(/usr/bin/identify -verbose tmp.jpg | grep 'Image statistics' -A 8 | grep 'entropy' | cut -d ':' -f 2) > 95" | bc) ]
 then

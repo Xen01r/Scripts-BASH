@@ -8,6 +8,6 @@ This script retreives daily images from NASA website : https://wvs.earthdata.nas
 
 ### Prerequisites
 
-*Wget
-*Convert & identify command from ImageMagick package
+* Wget
+* Convert & identify command from ImageMagick package
 
